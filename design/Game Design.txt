@@ -1,0 +1,67 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf130
+{\fonttbl\f0\fnil\fcharset0 Calibri;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red5\green99\blue193;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid101\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\margl1440\margr1440\vieww11680\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\ri0\qc\partightenfactor0
+
+\f0\fs24 \cf0 Game Design\
+\pard\pardeftab720\ri0\qj\partightenfactor0
+\cf0 ==============================================================================\
+Similar Work Features Design\
+\
+Before I started my work on the project, I invested some times to study another bird of angry bird: {\field{\*\fldinst{HYPERLINK "https://github.com/estevaofon/angry-birds-python"}}{\fldrslt \cf2 \ul \ulc2 https://github.com/estevaofon/angry-birds-python}}. It gave me some ideas on my project but it also has some features that I wanted to avoid in my code, following are some discussions about how this affected my work.\
+\
+\pard\pardeftab720\li720\fi-360\ri0\qj\partightenfactor0
+\ls1\ilvl0\cf0 1.	Desirable features: \
+\pard\pardeftab720\li720\ri0\qj\partightenfactor0
+\cf0 Through this program, along with the reference on the official site of pymunk, I learned a lot about how the pymunk module could work in my project. In this program, it has classes for birds and piglets which has very clear mind about the implementation of pymunk module, through the code of these two classes, I figured out how can I build up my classes for the characters in my game.\
+\pard\pardeftab720\li720\fi-360\ri0\qj\partightenfactor0
+\ls2\ilvl0\cf0 2.	Undesirable features:\
+\pard\pardeftab720\li720\ri0\qj\partightenfactor0
+\cf0 There were also some features in this program that I didn\'92t want to include in my code. For example, it doesn\'92t have very good style, it has global variables, magic numbers, many of codes are called directly instead of being defined in functions, which may make logic of the developing mass up, and increase the hardness of debugging.\
+\pard\pardeftab720\ri0\qj\partightenfactor0
+\cf0 \
+==============================================================================\
+Replay Mode Design\
+\
+The replay mode is design to act like playing a record of the played game, but the actual way it works is not playing a video for real. Below is the discussion how it was designed.\
+\
+Every events in the \'93replay\'94 happens for real, again, exactly same as what happened when player had that game. To realized this, the way I design to do this is that to keep track of every command the player made when he/she was having that game: Each mouse click or key press was store in a dictionary, along with all necessary parameters and name of function called in string format, these contents are saved as the value in the dictionary, the keys of these values are the variable called \'93time\'94, they are not the \'93actual time\'94 in our world, they are the frame time in the animation since the play started a new game. By doing so, I can have a dictionary recording all actions at each frame, if there are any. With this information, run the code again, then the \'93video\'94 shows up in front of the players, each event in it is exactly same as what happened previously.\
+\
+==============================================================================\
+User Interface Design\
+\
+In my project, It mainly has two types of classes, one is for the objects appear in the game such as birds, pigs and other game objects, the second one is for the buttons in each page inside the game. This discussion is about the second type: button classes.\
+\pard\pardeftab720\ri0\partightenfactor0
+
+\f1 \cf0 \
+\pard\pardeftab720\ri0\qj\partightenfactor0
+
+\f0 \cf0 The merits of button class is that it saves lots of upper class (the game class) variable names and makes the event functions of the game works simpler than the way without buttons, for example: the button class enable me to create a type of button, and them use it to create many instances, otherwise, I have to create different buttons over and over again (like pictures, functions, responses when mouse stops on it, etc), I have 5 major modes and nearly 20 buttons in my project, without the button classes, it will take incredibly more time, lines, variable names to realize the same functions the button classes realized, besides, it makes the code lose the elegance. \
+\
+So this is why I create button classes in my project so that I can speed up and focus more on other parts of the project.\
+\
+==============================================================================\
+Explosion Detection Design\
+\
+Explosion is a very import feature in my game, when a bird or TNT explodes, I let the program apply impulses on all objects that is inside the explosion affecting radius. But in the early developing stage, there was a bug that the explosion can penetrate the walls. This was due to the omission that I didn\'92t take those walls into consideration. To fix this bug, I need to design an algorithm to judge if there are any obstacles between two objects, which can be further thought as the question that if two lines are intersecting with each other because any rectangle can be represented by its two diagnoses, as long as the line connecting two objects doesn\'92t intersect with any one of the diagnoses, its safe to say that the rectangle is not between this two objects, this the classes.py, I had couple of functions to calculate this.\
+\
+==============================================================================\
+Rectangles and Circles Overlap Design\
+\
+In the Scene Editor mode, there are two very annoying problems: how to judge if two rectangles are overlapping, and if a rectangle is overlapping with a circle. This questions can be solved mathematically, of course. However, due to the very tight schedule, I have simplify this question by iterating each pixel in the rectangle to judge if it is in another rectangle or circle. Through my solution is very easy to understand, the big-oh of my algorithm is obviously very large. Fortunately, even so, it doesn\'92t requires very large amount of calculation in real implementation, because the sizes of the item in the game is relatively small, the biggest one is 204 by 20, so in the worst case it require 4080 calculations, which is still piece of cake for Python so the performance of the code is not affected by algorithm at all. But I still want to mark this point and if I have more sufficient time, I will definitely come back and to improve the algorithm.\
+\
+==============================================================================\
+Automatic Alignment Design\
+\
+Under the mode Scene Editor, there is a button called \'93AUTO-ALIGN\'94, it helps players to automatically align items in rows and columns if it is switched on. To realized this, I wrote couple functions to search for the nearest same kind of item as the one the player is trying to place, and for the nearest same type item, I computed the 4 possible center positions (left, top, right and bottom) around it where the new item could be placed aligned, if the distance between mouse and any of these four points is less than the threshold I set up, the item will be forced to be placed at that position (if legal), not that this function only works for the alignments for same types of items (piglets and piglets, bricks and bricks, etc.), it can NOT align different kinds of items (piglets and stones, TNT and stones, etc.).\
+\
+==============================================================================\
+Rigid Body Collision Motion Design\
+\
+This is the core of this game, to detect the rigid body collisions and simulate the motion of rigid bodies in real physic world. The computation of this could be extremely complicate so that is why I imported the third party library pymunk. It helps to simulate the real physic world, so I basically hand this work to the pymunk by building some classes of objects to represent piglets, birds, stones, bricks, and seesaws. So each one of them inherit the properties of the class defined in the pymunk, they can be rectangles, circles, and polygons. By doing this, I can add other features (such as the abilities of the birds or some other properties) to objects \'93in the real world\'94. In short, I was responsible for let them collide or how and when they collide, and I use the pymunk to handle the issues once they collide.\
+}

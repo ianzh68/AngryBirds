@@ -1,0 +1,1 @@
+{50: ['launch', 'blue', 152, 290], 'mode': 'level1', 20: ['select', 'blue'], 69: ['release', 'BlueBird(data.x0, data.y0, impulse, angle, data, data.blueBird)', Vec2d(5803.4472514188, 0.0), 0.034469101, 94, 292], 358: ['end'], 75: ['ability', 'blue']}

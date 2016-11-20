@@ -1,0 +1,1 @@
+{288: ['release', 'RedBird(data.x0, data.y0, impulse, angle, data, data.redBird)', Vec2d(4833.2183894378, 0.0), 3.5682201467, 836, 175], 257: ['launch', 'red', 792, 195], 1158: ['end'], 'mode': 'level6', 410: ['launch', 'red', 784, 262], 443: ['release', 'RedBird(data.x0, data.y0, impulse, angle, data, data.redBird)', Vec2d(3522.7829907617, 0.0), 4.108639647, 804, 233]}
