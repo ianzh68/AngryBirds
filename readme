@@ -1,0 +1,27 @@
+Hi, this is my term project for 15-112 Fundamental of Programming and Computer Science in CMU, my project is a recreation (with some new features) of the game Angry Birds, please follow the game built-in instructions to play, have fun!
+
+And a few things to notice:
+
+1. To launch the game, please execute the file “run.py” in the folder “tp3”.
+
+2. The environment I develop this game is Mac OS X El Captain, it may not work well on Windows OS, if it crashes because of warnings about “chipmunk”, please visit this page for solution (see “Compile Chipmunk” at bottom): http://www.pymunk.org/en/latest/installation.html.
+
+3. I used a third party lib called “pymunk”, it was already included in this file. Besides that, you will still need pygame to run the code, If you don’t have it on your computer, please install pygame before you run it by following: http://florian-berger.de/en/articles/installing-pygame-for-python-3-on-os-x/.
+
+4. If it crashes because of error “pygame.error: Unrecognized music format” on Mac OS X: this is probably because you don’t have sdl_mixer installed properly in your computer, if you have brew installed already, try following steps:
+
+(if not: install brew first: http://brew.sh/, then follow the steps below)
+
+    brew install libvorbis
+    brew reinstall dl_mixer
+
+and see if that works, if not, try:
+
+    brew uninstall libvorbis libogg
+    brew reinstall dl_mixer —with-libvorbis
+
+It should work now.
+(solution from https://github.com/justinmeister/Mario-Level-1/issues/5)
+
+5. Now you are good to go, have fun!
+
